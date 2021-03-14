@@ -15,6 +15,8 @@ repositories {
 dependencies {
     compile "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation("com.destroystokyo.paper:paper-api:1.16.5-R0.1-SNAPSHOT")
+    //  add depend
+    compile fileTree(dir: 'libs', include: '*.jar')
 }
 
 compileKotlin {
