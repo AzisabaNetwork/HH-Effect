@@ -1,5 +1,6 @@
 package net.testusuke.hh.effect.item.record
 
+import net.testusuke.hh.effect.Main.Companion.plugin
 import org.bukkit.Bukkit
 import org.bukkit.Sound
 import org.bukkit.entity.Creature
@@ -68,19 +69,16 @@ enum class RecordAction {
                 return
             }
             for(entity in player.getNearbyEntities(3.0, 3.0, 3.0)) {
-                //  check if entity is mob
-                if(entity !is Creature)continue
-
                 if(entity is Player) {
                     //  Command
                     Bukkit.dispatchCommand(entity, "spawn")
-                    continue
                 }else {
+                    //  check if entity is mob
+                    if(entity !is Creature)continue
                     //  落下ダメージ
                     RecordUtils.damage(entity)
                 }
             }
-            Bukkit.dispatchCommand(player,"spawn")
         }
     },
     //  自身のエフェクトリセット(Milkと同じ)
@@ -104,9 +102,6 @@ enum class RecordAction {
             }
             val effect = PotionEffect(PotionEffectType.SPEED, 20 * 20, 3)
             for(entity in player.getNearbyEntities(3.0, 3.0, 3.0)){
-                //  check if entity is mob
-                if(entity !is Creature)continue
-
                 if(entity is Player) {
                     entity.addPotionEffect(effect)
                 }
