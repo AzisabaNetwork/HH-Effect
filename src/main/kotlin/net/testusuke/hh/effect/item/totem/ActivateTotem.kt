@@ -2,6 +2,7 @@ package net.testusuke.hh.effect.item.totem
 
 import net.minecraft.server.v1_16_R3.PacketPlayOutEntityStatus
 import net.testusuke.hh.effect.Main.Companion.plugin
+import org.bukkit.Bukkit
 import org.bukkit.GameMode
 import org.bukkit.Location
 import org.bukkit.Material
@@ -40,7 +41,6 @@ object ActivateTotem:Listener {
             //  Task(tnt and lightning)
             object : BukkitRunnable(){
                 override fun run(){
-                    //  killer
                     val location = player.location
                     val world = location.world
                     val beforeX = location.blockX
@@ -50,11 +50,13 @@ object ActivateTotem:Listener {
                         val x = ThreadLocalRandom.current().nextDouble(-2.0,2.0)
                         val z = ThreadLocalRandom.current().nextDouble(-2.0,2.0)
                         val targetLocation = Location(world,beforeX + x, y.toDouble(),beforeZ + z)
-                        world?.strikeLightning(targetLocation)
-                        world?.createExplosion(targetLocation,6.0F)
+                        Bukkit.getScheduler().runTask(plugin, Runnable {
+                            world?.strikeLightning(targetLocation)
+                            world?.createExplosion(targetLocation,6.0F)
+                        })
                     }
                 }
-            }.runTaskLater(plugin,40)
+            }.runTaskLaterAsynchronously(plugin,40)
         }
     }
 }
