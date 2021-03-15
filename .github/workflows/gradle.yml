@@ -15,7 +15,8 @@ jobs:
         uses: actions/setup-java@v1
         with:
           java-version: 11
-      - uses: derongan/nmsaction@v1
+      - name: getting nms
+        uses: derongan/nmsaction@v1
         with:
           rev: 1.16.5
       - name: Install nms into m2
