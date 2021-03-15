@@ -11,11 +11,15 @@ class Main: JavaPlugin() {
     companion object{
         //  plugin instance
         lateinit var plugin: Main
+        //  plugin status
+        var enabled = false
     }
 
     override fun onEnable() {
         //  instance
         plugin = this
+        //  status
+        enabled = true
 
         /* ------------ Config ------------ */
 
@@ -36,6 +40,7 @@ class Main: JavaPlugin() {
     }
 
     override fun onDisable() {
-
+        //  status
+        enabled = false
     }
 }
